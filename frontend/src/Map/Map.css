@@ -1,0 +1,27 @@
+path:hover{
+    fill: #59a359;
+}
+svg{
+    padding-top : 3rem;
+    height: 500px;
+    width: 600px;
+    fill: #67bd67;
+}
+
+.map-container {
+    display: flex;
+    align-items: flex-start; /* 위쪽 정렬 */
+}
+
+.map {
+    flex: 1; /* 왼쪽 영역 차지 */
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    padding-left: 200px; /* 너무 붙지 않게 조정 */
+}
+
+.weather-info {
+    flex: 1; /* 오른쪽 영역 차지 */
+    padding: 20px;
+    /*border-left: 2px solid #ddd; !* 왼쪽 경계선 *!*/
+}
