@@ -2,11 +2,12 @@ import React from 'react'
 import {ReactComponent as SouthKorea} from "@svg-maps/south-korea/south-korea.svg";
 import './Map.css'
 import {useState,useEffect} from 'react'
-import {fetchWeatherData} from "../WeatherAPI/weatherAPI";
+import {fetchWeatherData,regionCodes} from "../WeatherAPI/weatherAPI";
 
 
 const Map = () => {
     const [selectedRegion, setSelectedRegion] = useState("");
+    const [regionName, setRegionName] = useState("");
     const [weatherData, setWeatherData] = useState([]);
 
     useEffect(() => {
@@ -19,7 +20,13 @@ const Map = () => {
 
     const handleRegionClick = (event) => {
         const regionId = event.target.id;
-        setSelectedRegion(regionId);
+        console.log(regionId);
+        if(regionId!==""){
+            const {title} = regionCodes[regionId];
+            setSelectedRegion(regionId);
+            setRegionName(title);
+        }
+
     }
     return(
         <div className={"map-container"}>
@@ -27,7 +34,7 @@ const Map = () => {
                 <SouthKorea onClick={handleRegionClick}/>
             </div>
             <div className = {"weather-info"}>
-                {selectedRegion ? `선택한 지역: ${selectedRegion}` : "지역을 클릭하세요"}
+                {regionName ? `선택한 지역: ${regionName}` : "지역을 클릭하세요"}
                 {weatherData.length > 0 ? (
                     <div>
                         <h3>날씨 정보</h3>
