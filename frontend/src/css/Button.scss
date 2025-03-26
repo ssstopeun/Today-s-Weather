@@ -216,7 +216,7 @@ $framePad : 5px;
     display: inline-block;
     padding: 0.5em 0;
     border-radius: 0;
-    color: #cd88aa;
+    color: #000000;
     //margin-top:0.5rem;
     font-weight: bold;
     font-size: 1rem;
@@ -225,7 +225,7 @@ $framePad : 5px;
     text-decoration: none;
     position: relative;
     &:hover{
-        color: #754d61;
+        color: #777777;
         &:before{
             transform: none;
             opacity: 1;
