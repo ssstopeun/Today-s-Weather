@@ -43,8 +43,8 @@ export const SKYCode = {
 }
 export const PTYCode = {
     "0":{name:"없음",match:"없음",imgLink : "https://i.ibb.co/0RYJG651/flat-2022478-1280.png"},
-    "1":{name:"비",match:"POP",imgLink:"https://i.ibb.co/HT6w3RM9/flat-2022478-1280.png"},
-    "2":{name:"비/눈",match:"POP",imgLink:"https://i.ibb.co/ksS4n5hj/flat-2022478-1280.png"},
+    "1":{name:"비",match:"PCP",imgLink:"https://i.ibb.co/HT6w3RM9/flat-2022478-1280.png"},
+    "2":{name:"비/눈",match:"PCP",imgLink:"https://i.ibb.co/ksS4n5hj/flat-2022478-1280.png"},
     "3":{name:"눈",match:"SNO",imgLink:"https://i.ibb.co/gbRz0hvx/flat-2022478-1280.png"},
-    "4":{name:"소나기",match:"POP",imgLink:"https://i.ibb.co/zhxDm0np/flat-2022478-1280.png"}
+    "4":{name:"소나기",match:"PCP",imgLink:"https://i.ibb.co/zhxDm0np/flat-2022478-1280.png"}
 }

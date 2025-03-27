@@ -3,7 +3,7 @@ import {ReactComponent as SouthKorea} from "@svg-maps/south-korea/south-korea.sv
 import './Map.css'
 import {useState,useEffect} from 'react'
 import {fetchWeatherData,getCurrentDate,processWeatherData} from "../WeatherAPI/weatherAPI";
-import {PTYCode, regionCodes, SKYCode} from "../WeatherAPI/DataSet";
+import {PTYCode, regionCodes, SKYCode,categoryMap} from "../WeatherAPI/DataSet";
 
 
 const Map = () => {
@@ -39,24 +39,41 @@ const Map = () => {
                 <SouthKorea onClick={handleRegionClick} />
             </div>
             <div className="weather-info">
-                {console.log(weatherData)}
-                {weatherData!==[]?(
+                {console.log("weatherData : ",weatherData)}
+                {weatherData.PTY!==undefined?(
                     <div>
-                        <h3>{regionName}의 현재 날씨 정보</h3>
+                        <h3 style = {{textAlign : "left"}}>{regionName}의 현재 날씨 정보</h3>
                         {console.log("PTY : ",weatherData["PTY"])}
-                        {weatherData["PTY"] === "0" ?(
-                            <div>
-                            <img width = "50" src = {SKYCode[weatherData["SKY"]].imgLink} alt = "SKY image" />
-                            </div>
+                        <div  style={{ display: "flex", alignItems: "center", gap: "10px"}}>
+                            {weatherData["PTY"] === "0" ?(
+                                <img width = "50" src = {SKYCode[weatherData["SKY"]].imgLink} alt = "SKY image" />
                             ):(
-                            <div>
-                                <img width = "50" src = {PTYCode[weatherData["PTY"]].imgLink} alt = "PTY image" />
+                                <>
+                                    <img width="50" src={PTYCode[weatherData["PTY"]]?.imgLink} alt="PTY image" />
+                                    <p>{categoryMap[PTYCode[weatherData["PTY"]].match].name} : {weatherData[PTYCode[weatherData["PTY"]].match]}</p>
+                                </>
+                            )
+                            }
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", gap: "10px"}}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px", textAlign:"left"}}>
+                                <p>
+                                    현재 기온 : {weatherData.TMP} {categoryMap["TMP"].unit}
+                                    <br />
+                                    <br />
+                                    강수 확률 : {weatherData.POP} {categoryMap["POP"].unit}
+                                    <br />
+                                    <br />
+                                    습도 : {weatherData.REH} {categoryMap["REH"].unit}
+                                    <br />
+                                    <br />
+                                    일 최고/최저 기온 : {weatherData.TMN} {categoryMap["TMN"].unit} / {weatherData.TMX} {categoryMap["TMX"].unit}
+                                </p>
                             </div>
-                        )
-                        }
+                        </div>
                     </div>
                 ) : (
-                    <p>날씨 데이터를 불러오는 중 ...</p>
+                    <p>지역을 선택해 주십시오.</p>
                 )}
             </div>
         </div>
