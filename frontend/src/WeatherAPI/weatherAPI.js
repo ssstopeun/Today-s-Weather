@@ -16,6 +16,28 @@ export const getCurrentDate = () => {
     return `${year}${month}${day}`;
 }
 
+export const fetchWeatherDataFromNxNy = async (nx,ny) => {
+    const baseDate = getCurrentDate();
+
+    const apiUrl =`${baseUrl}?serviceKey=${serviceKey}&numOfRows=${numOfRows}&pageNo=${pageNo}&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}`;
+
+    try{
+        const response = await fetch(apiUrl);
+        if(!response.ok){
+            throw new Error("API 요청 실패");
+        }
+        const data = await response.text();
+        const weatherInfo = await parseWeatherInfo(data);
+        return weatherInfo;
+    }catch (error){
+        console.error("API 요청 중 오류 발생: ",error);
+        return null;
+    }
+}
+
+
+
+
 export const fetchWeatherData = async (region) => {
     if(!regionCodes[region]){
         throw new Error("올바른 지역을 선택하세요 : " +region);
