@@ -39,6 +39,20 @@ const Map = () => {
         }
     }, [selectedRegion]);
 
+
+    const handleCurrentLocationClick = () => {
+        if(location){
+            fetchWeatherDataFromNxNy(location.latitude, location.longitude)
+                .then(data => {
+                    const processedData = processWeatherData(data);
+                    setSelectedRegion(""); // 선택 지역 초기화
+                    setRegionName(""); // 지역명 초기화
+                    setWeatherData(processedData);
+                })
+                .catch(error => console.error("현재 위치 날씨 실패: ", error));
+        }
+    };
+
     const handleRegionClick = (event) => {
         const regionId = event.target.id;
         if(regionId!==""){
@@ -54,14 +68,17 @@ const Map = () => {
             <div className="map">
                 <SouthKorea onClick={handleRegionClick} />
             </div>
-            <div className="weather-info">
+
+
+
+                <div className="weather-info">
                 {weatherData.PTY !== undefined ? (
                     // 날씨 정보가 있을 때의 UI
                     <div>
                         {regionName ? (
                             <h3 style={{ textAlign: "left" }}>{regionName}의 현재 날씨 정보</h3>
                         ) : (
-                            <h3 style={{ textAlign: "left" }}>현재 날씨 정보</h3>
+                            <h3 style={{ textAlign: "left" }}>현재위치의 날씨 정보</h3>
                         )}
                         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                             {weatherData["PTY"] === "0" ? (
@@ -87,10 +104,16 @@ const Map = () => {
                             </div>
                         </div>
                     </div>
+
                 ) : (
                     // 지역을 선택해달라는 메시지
                     <p></p>
                 )}
+            </div>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+                <button onClick={handleCurrentLocationClick} className="current-location-btn">
+                    📍 현재 위치 날씨 보기
+                </button>
             </div>
         </div>
     );
